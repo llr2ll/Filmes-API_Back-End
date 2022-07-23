@@ -6,7 +6,7 @@ const pool = require('./db.js')
     app.use(express.json())
     app.use(express.urlencoded({ extended: true}));
 
-    app.post('/films', async(req,res) =>{
+    app.post('/', async(req,res) =>{
         const {id, title, image, movie_banner, description, director, producer} = req.body
         
         try {   
@@ -16,7 +16,7 @@ const pool = require('./db.js')
         catch (error) { return res.status(500).json({ message: error.message }) }
     })
     
-    app.get('/films', async(req, res) => {
+    app.get('/', async(req, res) => {
         try {
           const [result] = await pool.query('SELECT * FROM films_list');
           return res.status(200).json(result);

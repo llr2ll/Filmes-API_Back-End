@@ -5,6 +5,15 @@ const pool = require('./db.js')
     app.listen(3000,() => {console.log('Sever rodando: http://localhost:3000')});
     app.use(express.json())
     app.use(express.urlencoded({ extended: true}));
+    app.use((req,res,next) =>{
+      res.header('Access-Control-Allow-Origin','*')
+      res.header('Access-Control-Allow-Header','Origin, X-Requrested-With, Content-Type, Accept, Authorization')
+      if(req.method === 'OPTIONS'){
+        res.header('Acess-Control-Allow-Methods','GET,POST')
+        return res.status(200)
+      }
+      next();
+    })
 
     app.post('/', async(req,res) =>{
         const {id, title, image, movie_banner, description, director, producer} = req.body

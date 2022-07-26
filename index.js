@@ -33,7 +33,7 @@ const pool = require('./db.js')
         catch (error) { return res.status(500).json({ message: error.message }) }
     });
 
-    app.delete('/usuarios/:id', async(req, res) => {
+    app.delete('/films/:id', async(req, res) => {
             try {
               const [result] = await pool.query('Delete FROM usuario WHERE id=?',(req.params.id));
               return res.status(200).json(result);

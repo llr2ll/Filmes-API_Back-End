@@ -9,7 +9,7 @@ const pool = require('./db.js')
       res.header('Access-Control-Allow-Origin','*')
       res.header('Access-Control-Allow-Header','Origin, X-Requrested-With, Content-Type, Accept, Authorization')
       if(req.method === 'OPTIONS'){
-        res.header('Acess-Control-Allow-Methods','GET,POST')
+        res.header('Acess-Control-Allow-Methods','GET,POST,DELETE')
         return res.status(200)
       }
       next();
@@ -32,3 +32,11 @@ const pool = require('./db.js')
         } 
         catch (error) { return res.status(500).json({ message: error.message }) }
     });
+
+    app.delete('/usuarios/:id', async(req, res) => {
+            try {
+              const [result] = await pool.query('Delete FROM usuario WHERE id=?',(req.params.id));
+              return res.status(200).json(result);
+            } 
+            catch (error) { return res.status(500).json({ message: error.message }) }
+        })

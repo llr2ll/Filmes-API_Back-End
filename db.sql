@@ -8,4 +8,5 @@ CREATE TABLE `films_list` (
 	`producer` varchar(85) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE InnoDB,
-  CHARSET utf8mb3;
+  CHARSET utf8mb4,
+  COLLATE utf8mb4_unicode_ci;
